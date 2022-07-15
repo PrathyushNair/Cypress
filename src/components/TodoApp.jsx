@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const TodoApp = () => {
   const [value, setValue] = useState("");
   const [todos, setTodos] = useState([]);
-
+  const[error,setError]=React.useState(false)
   const handleChange = (e) => {
     setValue(e.target.value);
     console.log(value)
@@ -17,9 +17,14 @@ const TodoApp = () => {
     let resp = await axios.post("http://localhost:4004/todos", {
       value: value,
       isCompleted: false,
-    });
-    setTodos([...todos, resp.data]);
-    setValue("");
+    }).then((resp)=>{
+      setTodos([...todos, resp.data]);
+      setValue("");
+    })
+    .catch((e)=>{
+      setError(true)
+    })
+  
   };
 
   useEffect(() => {
@@ -35,7 +40,7 @@ const TodoApp = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
-      <TodoList todos={todos} />
+      <TodoList error ={error}todos={todos} />
     </div>
   );
 };
