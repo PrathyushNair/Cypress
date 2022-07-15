@@ -5,10 +5,11 @@ const TodoInput = ({ value, handleChange, handleSubmit }) => {
     e.preventDefault();
     handleSubmit();
   };
+  console.log("value in input",value)
   return (
     <form onSubmit={submit}>
-      <input type="text" value={value} onChange={handleChange} />
-      <button type="submit">Add</button>
+      <input class="iptag"data-testid="inputtag"autoFocus type="text" value={value} onChange={handleChange} />
+      <button data-testid="addbtn" type="submit">Add</button>
     </form>
   );
 };
