@@ -50,4 +50,15 @@ describe('empty spec', () => {
      cy.get("[data-testid=error]").should("be.visible")
      //cy.get("[data-testid=list]").should("have.length",1)
    })
+
+  
+   it.only("checking functionality of delete button",()=>{
+    cy.get("[data-testid=deletebtn]").should("have.length",1)
+    cy.get("[data-testid=deletebtn]").click()
+    cy.get("[data-testid=list]").should("have.length",0)
+
+    
+   })
+
+
 })

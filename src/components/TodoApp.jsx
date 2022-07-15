@@ -12,6 +12,14 @@ const TodoApp = () => {
     setValue(e.target.value);
     console.log(value)
   };
+ 
+  const handledelete=async(id)=>{
+    let resp = await axios.delete(`http://localhost:4004/todos/${id}`)
+    axios.get("http://localhost:4004/todos").then((r) => {
+      setTodos(r.data);
+      console.log("data",r.data)
+    })
+  }
 
   const handleSubmit = async () => {
     let resp = await axios.post("http://localhost:4004/todos", {
@@ -30,6 +38,7 @@ const TodoApp = () => {
   useEffect(() => {
     axios.get("http://localhost:4004/todos").then((r) => {
       setTodos(r.data);
+      console.log("data",r.data)
     });
   }, []);
   return (
@@ -40,7 +49,7 @@ const TodoApp = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
-      <TodoList error ={error}todos={todos} />
+      <TodoList handledelete={handledelete}error ={error}todos={todos} />
     </div>
   );
 };
