@@ -52,12 +52,32 @@ describe('empty spec', () => {
    })
 
   
-   it.only("checking functionality of delete button",()=>{
+   it("checking functionality of delete button",()=>{
     cy.get("[data-testid=deletebtn]").should("have.length",1)
     cy.get("[data-testid=deletebtn]").click()
     cy.get("[data-testid=list]").should("have.length",0)
 
     
+   })
+   it.only("adding data and testing toggling functionality",()=>{
+    // cy.intercept("POST","",{fixture:"posttodo.json"})
+    // .as("posttodo")
+    // let value="completed testing"
+    // cy.get("[data-testid=inputtag]").type(value)
+    // cy.get("[data-testid=addbtn]").click()
+    // cy.wait("@posttodo")
+    // cy.get("[ data-testid=checkbox]").should("be.visible")
+    // cy.intercept('PATCH',{fixture:"posttodo.json"}, {
+ 
+    //   body: {
+    //     "id":2,"isCompleted":true
+    // },
+    // }).as("toggle")
+    cy.get("[ data-testid=checkbox]").should("be.visible")
+    cy.get("[ data-testid=checkbox]").check()
+    cy.get("[ data-testid=inditask]").should('have.css', 'color', 'rgb(0, 128, 0)')
+    //cy.wait("@toggle")
+   // cy.get("[ data-testid=checkbox]").uncheck()
    })
 
 

@@ -20,7 +20,21 @@ const TodoApp = () => {
       console.log("data",r.data)
     })
   }
-
+ const handletoggle=async(id,completed)=>{
+  console.log("in toggle")
+  if(completed)
+  {
+    let resp=await axios.patch(`http://localhost:4004/todos/${id}`,{isCompleted:false})
+  }
+  else{
+    let resp=await axios.patch(`http://localhost:4004/todos/${id}`,{isCompleted:true})
+  }
+  
+  axios.get("http://localhost:4004/todos").then((r) => {
+    setTodos(r.data);
+  
+  });
+ }
   const handleSubmit = async () => {
     let resp = await axios.post("http://localhost:4004/todos", {
       value: value,
@@ -49,7 +63,7 @@ const TodoApp = () => {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       />
-      <TodoList handledelete={handledelete}error ={error}todos={todos} />
+      <TodoList handletoggle={handletoggle}handledelete={handledelete}error ={error}todos={todos} />
     </div>
   );
 };
